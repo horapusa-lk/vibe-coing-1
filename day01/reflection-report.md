@@ -1,6 +1,6 @@
 # Reflection Report
 
-**GitHub Repository Link:** [https://github.com/horapusa-lk/vibe-coing-1](https://github.com/horapusa-lk/vibe-coing-1)
+**GitHub Repository Link:** [https://github.com/horapusa-lk/vibe-coing](https://github.com/horapusa-lk/vibe-coing)
 
 ## Prompts Used for Generation
 
@@ -28,5 +28,5 @@
 1. _"add hello@apaloai.com as the mail"_
 2. _"change the contact me button to go to cretae a new email to hello@apaloai.com"_
 3. _"use the local file called 1771683013118.jpg as the profile pic"_
-4. _"read the full code and Create a one page reflection report. Your report should include the following the prompt used to generate this and the GitHub repo link (https://github.com/horapusa-lk/vibe-coing-1)"_
+4. _"read the full code and Create a one page reflection report. Your report should include the following the prompt used to generate this and the GitHub repo link (https://github.com/horapusa-lk/vibe-coing)"_
 5. _"refelction report only needs to include the prompt and the repo . modify it"_
