@@ -1,1 +1,1 @@
-# vibe-coing-1
+# vibe-coding
