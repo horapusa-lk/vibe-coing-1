@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Idea Board</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+        }
+
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            box-sizing: border-box;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #eee;
+            margin: 5px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: gray;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h2>Group Idea Board</h2>
+    </header>
+
+    <div class="container">
+
+        <input type="text" id="nameInput" placeholder="Enter your name">
+
+        <input type="text" id="ideaInput" placeholder="Enter your idea">
+
+        <br>
+
+        <button onclick="addIdea()">Add Idea</button>
+        <button onclick="clearInput()">Clear</button>
+
+        <h3>Ideas</h3>
+
+        <ul id="ideaList"></ul>
+
+        <p>Total Ideas: <span id="count">0</span></p>
+
+    </div>
+
+    <footer>
+        Group Project
+    </footer>
+
+    <script>
+
+        let ideasData = [];
+
+        // Load existing ideas from localStorage on page load
+        window.onload = function () {
+            const savedData = localStorage.getItem("ideasBoardIdeas");
+            if (savedData) {
+                ideasData = JSON.parse(savedData);
+                renderIdeas();
+            }
+        };
+
+        function addIdea() {
+            let idea = document.getElementById("ideaInput").value;
+            let name = document.getElementById("nameInput").value;
+
+            // Display an error if the user enters an empty value
+            if (idea === "" || name === "") {
+                alert("Error: Input fields cannot be empty.");
+                return;
+            }
+
+            // Display an error message setting a maximum character size
+            if (idea.length > 250) {
+                alert("Error: Idea is too long. The maximum character size is 250.");
+                return;
+            }
+
+            // Display a pop up message saying same idea cannot be put again
+            let isDuplicate = ideasData.some(item => item.idea === idea);
+            if (isDuplicate) {
+                alert("same idea cannot be put again");
+                return;
+            }
+
+            // Add the new idea (keeps space-padded ideas as distinct)
+            ideasData.push({ name: name, idea: idea });
+
+            // Save to localStorage so ideas stay the same after refresh
+            localStorage.setItem("ideasBoardIdeas", JSON.stringify(ideasData));
+
+            renderIdeas();
+
+            document.getElementById("ideaInput").value = "";
+            document.getElementById("nameInput").value = "";
+        }
+
+        function clearInput() {
+            document.getElementById("ideaInput").value = "";
+            document.getElementById("nameInput").value = "";
+        }
+
+        function renderIdeas() {
+            let ideaList = document.getElementById("ideaList");
+            ideaList.innerHTML = "";
+
+            ideasData.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = item.idea + " - suggested by " + item.name;
+                ideaList.appendChild(li);
+            });
+
+            document.getElementById("count").textContent = ideasData.length;
+        }
+
+    </script>
+
+</body>
+
+</html>
